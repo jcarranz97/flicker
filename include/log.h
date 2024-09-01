@@ -19,7 +19,10 @@ typedef enum {
 } log_level_t;
 
 // Define a macro for _log_message with the default level set to INFO
-#define log_message(message, ...) _log_message(message, LOG_LEVEL_INFO, ##__VA_ARGS__)
+#define log_debug(message, ...) _log_message(message, LOG_LEVEL_DEBUG, ##__VA_ARGS__)
+#define log_info(message, ...) _log_message(message, LOG_LEVEL_INFO, ##__VA_ARGS__)
+#define log_warn(message, ...) _log_message(message, LOG_LEVEL_WARN, ##__VA_ARGS__)
+#define log_error(message, ...) _log_message(message, LOG_LEVEL_ERROR, ##__VA_ARGS__)
 
 void _log_message(const char* format, log_level_t level, ...);
 void set_log_level(log_level_t level);

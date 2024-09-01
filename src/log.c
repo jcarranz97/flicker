@@ -21,7 +21,7 @@ void _log_message(const char* message, log_level_t level, ...) {
         const char* color;
         switch (level) {
             case LOG_LEVEL_DEBUG: color = COLOR_GREEN; break;
-            case LOG_LEVEL_INFO:  color = COLOR_RESET; break;
+            case LOG_LEVEL_INFO:  color = COLOR_BLUE; break;
             case LOG_LEVEL_WARN:  color = COLOR_YELLOW; break;
             case LOG_LEVEL_ERROR: color = COLOR_RED; break;
             default: color = COLOR_RESET; break;
@@ -32,7 +32,7 @@ void _log_message(const char* message, log_level_t level, ...) {
         va_start(args, level);
 
         // Print timestamp directly
-        printf("%s[%6u.%06u] %s", COLOR_BLUE, seconds, microseconds, color);
+        printf("%s[%6u.%06u] %s", COLOR_GREEN, seconds, microseconds, color);
         vprintf(message, args);
         printf("%s", COLOR_RESET);
 
