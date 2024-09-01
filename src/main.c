@@ -373,6 +373,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
 // Note: For composite reports, report[0] is report ID
 void tud_hid_report_complete_cb(uint8_t instance, uint8_t const* report, uint16_t len)
 {
+  log_debug("function - tud_hid_report_complete_cb!\n");
   (void) instance;
   (void) len;
   (void) report;
@@ -397,6 +398,7 @@ void tud_hid_report_complete_cb(uint8_t instance, uint8_t const* report, uint16_
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
 {
   // TODO not Implemented
+  log_debug("function - tud_hid_get_report_cb!\n");
   (void) instance;
   (void) report_id;
   (void) report_type;
@@ -411,7 +413,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
 {
   (void) instance;
-
+  log_debug("function - tud_hid_set_report_cb!\n");
   if (report_type == HID_REPORT_TYPE_OUTPUT)
   {
     // Set keyboard LED e.g Capslock, Numlock etc...
