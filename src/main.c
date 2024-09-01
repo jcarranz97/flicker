@@ -19,6 +19,7 @@
 #include "tusb.h"
 
 #include "usb_descriptors.h"
+#include "log.h"
 
 
 // Which core to run on if configNUMBER_OF_CORES==1
@@ -203,7 +204,9 @@ void just_alive_task(__unused void *params) {
     while (true) {
         gpio_put(SECONDARY_LED, led_state);
         led_state = !led_state;
-        printf("just_alive_task - Led State=%d\n", led_state);
+        log_message("Test message with no variables.\n");
+        log_message("Test message with one variable: %d\n", 42);
+        log_message("just_alive_task - Led State=%d\n", led_state);
         vTaskDelay(500);
     }
 }
@@ -361,13 +364,20 @@ void tud_hid_report_complete_cb(uint8_t instance, uint8_t const* report, uint16_
 {
   (void) instance;
   (void) len;
+  (void) report;
+  log_message("tud_hid_report_completed!!!\n", LOG_LEVEL_DEBUG);
+  // Print the instance
+  log_message("  Instance: %u\n", instance, LOG_LEVEL_DEBUG);
 
-  uint8_t next_report_id = report[0] + 1u;
+  // Print the length of the reportaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  log_message("  Report Length: %u\n", LOG_LEVEL_DEBUG);
 
-  if (next_report_id < REPORT_ID_COUNT)
-  {
-    send_hid_report(next_report_id, button_read());
+  // Print the report data (as hex values for better readability)
+  log_message("  Report Data: \n", LOG_LEVEL_DEBUG);
+  for (uint16_t i = 0; i < len; i++){
+      log_message("    %02X\n", report[i], LOG_LEVEL_DEBUG);
   }
+  log_message("\n");
 }
 
 // Invoked when received GET_REPORT control request
