@@ -41,10 +41,12 @@ endif()
 
 add_executable(${TARGET_NAME}
     src/main.c
-    src/usb_descriptors.c
+    src/usb/usb_descriptors.c
     )
 target_include_directories(${TARGET_NAME} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/include/
+    ${CMAKE_CURRENT_LIST_DIR}/include/freertos/
+    ${CMAKE_CURRENT_LIST_DIR}/include/usb/
     )
 target_link_libraries(${TARGET_NAME} PRIVATE
     pico_async_context_freertos
